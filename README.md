@@ -69,7 +69,10 @@ terraform init
 
 ## Problemas conocidos y soluciones
 
-> Se irán añadiendo conforme aparezcan durante el despliegue.
+**Permisos de escritura en WSL sobre discos de Windows**
+Al trabajar con WSL sobre carpetas creadas con PowerShell como administrador,
+WSL no tiene permisos de escritura. Solución: dar permisos al usuario desde
+Propiedades → Seguridad → Control total en Windows.
 
 ---
 
