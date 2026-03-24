@@ -1,0 +1,9 @@
+# Estado de Terraform
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# Variables con credenciales
+*.tfvars
+.env
