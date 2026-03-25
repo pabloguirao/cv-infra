@@ -36,7 +36,7 @@ Introducir cuando lo solicite:
 - AWS Access Key ID
 - AWS Secret Access Key
 - Default region: `eu-south-2`
-- Default output format: `json`
+- Default output format: 
 
 Verificar que las credenciales funcionan correctamente:
 ```bash
@@ -52,6 +52,7 @@ cv-infra/
 ├── variables.tf     # Variables reutilizables
 ├── outputs.tf       # Outputs de Terraform (URL, etc.)
 ├── providers.tf     # Configuración del proveedor AWS
+├── images           # Carpeta con imagenes
 └── README.md        # Este archivo
 ```
 
@@ -64,6 +65,27 @@ Descarga los providers necesarios:
 ```bash
 terraform init
 ```
+### 2. Crear la infraestructura
+Previsualiza los cambios antes de aplicar:
+```bash
+terraform plan
+```
+Aplica los cambios:
+```bash
+terraform apply
+```
+### 3. Subir los archivos del CV a S3
+Sincroniza los archivos del repositorio mi-cv con el bucket:
+```bash
+aws s3 sync /ruta/a/mi-cv s3://cv-pabloguirao --exclude ".git/*" --exclude "README.md" --exclude ".gitignore"
+```
+
+Para verificar que se han subido correctamente:
+```bash
+aws s3 ls s3://cv-pabloguirao --recursive
+```
+
+Para actualizar el CV en el futuro, edita los archivos en mi-cv y vuelve a ejecutar el sync.
 
 ---
 
@@ -73,6 +95,11 @@ terraform init
 Al trabajar con WSL sobre carpetas creadas con PowerShell como administrador,
 WSL no tiene permisos de escritura. Solución: dar permisos al usuario desde
 Propiedades → Seguridad → Control total en Windows.
+
+**Permisos IAM insuficientes en el primer apply**
+El usuario IAM inicial no tenía todos los permisos necesarios para que
+Terraform pudiera hacer el apply. Se añadieron los
+permisos necesarios.
 
 ---
 
