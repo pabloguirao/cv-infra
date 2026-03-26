@@ -2,7 +2,8 @@
 markdown# cv-infra
 Infraestructura como código (IaC) para desplegar mi currículum personal en AWS usando Terraform.
 
-El currículum está disponible en: [pabloguirao/mi-cv](https://github.com/pabloguirao/mi-cv)
+El currículum está disponible en: [Currículum](https://d374chtomtan27.cloudfront.net/)
+El repositorio de la página está disponible en: [pabloguirao/mi-cv](https://github.com/pabloguirao/mi-cv)
 
 ---
 
@@ -135,3 +136,4 @@ no es necesario hacer terraform destroy manualmente.
 
 **Pablo Guirao**  
 [github.com/pabloguirao](https://github.com/pabloguirao)
+[cv](https://d374chtomtan27.cloudfront.net/)
