@@ -24,9 +24,9 @@ El repositorio de la página está disponible en: [pabloguirao/mi-cv](https://gi
 
 Crear un usuario IAM en la consola de AWS con las siguientes políticas en línea:
 
-- **S3**: CreateBucket, DeleteBucket, PutBucketPolicy, PutBucketWebsite, PutBucketPublicAccessBlock, PutObject, GetObject, DeleteObject, ListBucket
-- **CloudFront**: CreateDistribution, GetDistribution, UpdateDistribution, DeleteDistribution, TagResource, CreateOriginAccessControl, GetOriginAccessControl, DeleteOriginAccessControl
-- **IAM**: CreateServiceLinkedRole (limitado al rol de servicio de CloudFront)
+- **S3**: CreateBucket, DeleteBucket, PutBucketPolicy, PutBucketWebsite, PutBucketPublicAccessBlock, PutObject, GetObject, DeleteObject, ListBucket.
+- **CloudFront**: CreateDistribution, GetDistribution, UpdateDistribution, DeleteDistribution, TagResource, CreateOriginAccessControl, GetOriginAccessControl, DeleteOriginAccessControl.
+- **IAM**: CreateServiceLinkedRole (limitado al rol de servicio de CloudFront).
 
 Una vez creado el usuario, generar un **Access Key** y configurarlo en WSL:
 ```bash
@@ -114,18 +114,18 @@ aws cloudfront create-invalidation --distribution-id E26JZHHOLRQL3L --paths "/*"
 
 ## Problemas conocidos y soluciones
 
-**Permisos de escritura en WSL sobre discos de Windows**
+**Permisos de escritura en WSL sobre discos de**
 Al trabajar con WSL sobre carpetas creadas con PowerShell como administrador,
 WSL no tiene permisos de escritura. Solución: dar permisos al usuario desde
 Propiedades → Seguridad → Control total en Windows.
 
-**Permisos IAM insuficientes en el primer apply tanto en S3 como en Cloudfront**
+**Permisos IAM insuficientes en el primer apply tanto en S3 como en Cloudfront:**
 El usuario IAM inicial no tenía todos los permisos necesarios para que
 Terraform pudiera hacer el apply. Esto se ha hecho así con el objetivo de dar 
 los mínimos permisos posibles al usuario.Se han añadido los mínimos permisos 
 posibles al crearlo y se van añadiendo conforme se van necesitando.
 
-**Recursos tainted tras errores de permisos**
+**Recursos tainted tras errores de permisos:**
 Cuando un apply falla a mitad, Terraform marca el recurso como tainted
 y lo destruye y recrea en el siguiente apply. Es el comportamiento esperado,
 no es necesario hacer terraform destroy manualmente.
