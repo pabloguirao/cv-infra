@@ -96,11 +96,17 @@ terraform plan
 terraform apply
 ```
 
-### 4. Crear la distribución CloudFront
-Añade los recursos de CloudFront al main.tf (OAC + distribución + política S3) y aplica:
+### 5. Verificar el despliegue
+Abre el navegador y accede a la URL de CloudFront del output anterior.
+Para ver todos los outputs en cualquier momento:
 ```bash
-terraform plan
-terraform apply
+terraform output
+```
+### 6. Actualizar el CV
+Cuando hagas cambios en mi-cv, sincroniza e invalida la caché:
+```bash
+aws s3 sync /ruta/a/mi-cv s3://cv-pabloguirao --exclude ".git/*" --exclude "README.md" --exclude ".gitignore"
+aws cloudfront create-invalidation --distribution-id E26JZHHOLRQL3L --paths "/*"
 ```
 
 ---
