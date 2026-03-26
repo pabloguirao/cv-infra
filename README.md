@@ -1,4 +1,4 @@
-Aquí tienes el contenido completo para copiar y pegar:
+
 markdown# cv-infra
 Infraestructura como código (IaC) para desplegar mi currículum personal en AWS usando Terraform.
 
@@ -65,6 +65,7 @@ Descarga los providers necesarios:
 ```bash
 terraform init
 ```
+
 ### 2. Crear la infraestructura
 Previsualiza los cambios antes de aplicar:
 ```bash
@@ -74,6 +75,7 @@ Aplica los cambios:
 ```bash
 terraform apply
 ```
+
 ### 3. Subir los archivos del CV a S3
 Sincroniza los archivos del repositorio mi-cv con el bucket:
 ```bash
@@ -87,6 +89,20 @@ aws s3 ls s3://cv-pabloguirao --recursive
 
 Para actualizar el CV en el futuro, edita los archivos en mi-cv y vuelve a ejecutar el sync.
 
+### 4. Crear la distribución CloudFront
+Añade los recursos de CloudFront al main.tf (OAC + distribución + política S3) y aplica:
+```bash
+terraform plan
+terraform apply
+```
+
+### 4. Crear la distribución CloudFront
+Añade los recursos de CloudFront al main.tf (OAC + distribución + política S3) y aplica:
+```bash
+terraform plan
+terraform apply
+```
+
 ---
 
 ## Problemas conocidos y soluciones
@@ -96,10 +112,16 @@ Al trabajar con WSL sobre carpetas creadas con PowerShell como administrador,
 WSL no tiene permisos de escritura. Solución: dar permisos al usuario desde
 Propiedades → Seguridad → Control total en Windows.
 
-**Permisos IAM insuficientes en el primer apply**
+**Permisos IAM insuficientes en el primer apply tanto en S3 como en Cloudfront**
 El usuario IAM inicial no tenía todos los permisos necesarios para que
-Terraform pudiera hacer el apply. Se añadieron los
-permisos necesarios.
+Terraform pudiera hacer el apply. Esto se ha hecho así con el objetivo de dar 
+los mínimos permisos posibles al usuario.Se han añadido los mínimos permisos 
+posibles al crearlo y se van añadiendo conforme se van necesitando.
+
+**Recursos tainted tras errores de permisos**
+Cuando un apply falla a mitad, Terraform marca el recurso como tainted
+y lo destruye y recrea en el siguiente apply. Es el comportamiento esperado,
+no es necesario hacer terraform destroy manualmente.
 
 ---
 

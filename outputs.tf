@@ -12,3 +12,13 @@ output "bucket_regional_domain_name" {
   description = "Domain name del bucket, necesario para CloudFront"
   value       = aws_s3_bucket.cv.bucket_regional_domain_name
 }
+
+output "cloudfront_domain_name" {
+  description = "URL publica del CV en CloudFront"
+  value       = aws_cloudfront_distribution.cv.domain_name
+}
+
+output "cloudfront_distribution_id" {
+  description = "ID de la distribucion CloudFront, necesario para invalidar cache"
+  value       = aws_cloudfront_distribution.cv.id
+}
