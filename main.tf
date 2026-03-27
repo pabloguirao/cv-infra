@@ -38,6 +38,7 @@ resource "aws_cloudfront_distribution" "cv" {
   enabled             = true
   default_root_object = "index.html"
   comment             = "Distribucion CloudFront para cv-pabloguirao"
+  aliases             = [var.domain_name, var.www_domain_name]
 
   origin {
     domain_name              = aws_s3_bucket.cv.bucket_regional_domain_name
@@ -71,7 +72,9 @@ resource "aws_cloudfront_distribution" "cv" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn      = aws_acm_certificate.cv.arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 
   tags = {
@@ -102,4 +105,22 @@ resource "aws_s3_bucket_policy" "cv" {
       }
     ]
   })
+}
+
+//DNS
+
+resource "aws_acm_certificate" "cv" {
+  provider          = aws.us_east_1
+  domain_name       = var.domain_name
+  subject_alternative_names = [var.www_domain_name]
+  validation_method = "DNS"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  tags = {
+    Name    = "cv-guiraocloud"
+    Project = "cv-infra"
+  }
 }

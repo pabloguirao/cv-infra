@@ -16,3 +16,17 @@ variable "cloudfront_distribution_id" {
   type        = string
   default     = "E26JZHHOLRQL3L"
 }
+
+variable "domain_name" {
+  description = "DNS"
+  type        = string
+  default     = "guiraocloud.com"
+  
+}
+
+variable "www_domain_name" {
+  description = "DNS with www"
+  type        = string
+  default     = "www.guiraocloud.com"
+  
+}

@@ -22,3 +22,8 @@ output "cloudfront_distribution_id" {
   description = "ID de la distribucion CloudFront, necesario para invalidar cache"
   value       = aws_cloudfront_distribution.cv.id
 }
+
+output "acm_certificate_validation_records" {
+  description = "Registros DNS para validar el certificado en Namecheap"
+  value       = aws_acm_certificate.cv.domain_validation_options
+}
