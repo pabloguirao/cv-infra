@@ -2,7 +2,7 @@
 markdown# cv-infra
 Infraestructura como código (IaC) para desplegar mi currículum personal en AWS usando Terraform.
 
-El currículum está disponible en: [Currículum](https://d374chtomtan27.cloudfront.net/)   
+El currículum está disponible en: [Currículum](https://guiraocloud.com)   
 El repositorio de la página está disponible en: [pabloguirao/mi-cv](https://github.com/pabloguirao/mi-cv)
 
 ---
@@ -109,7 +109,8 @@ Cuando hagas cambios en mi-cv, sincroniza e invalida la caché:
 aws s3 sync /ruta/a/mi-cv s3://cv-pabloguirao --exclude ".git/*" --exclude "README.md" --exclude ".gitignore"
 aws cloudfront create-invalidation --distribution-id E26JZHHOLRQL3L --paths "/*"
 ```
-
+## 7.URL pública
+https://guiraocloud.com
 ---
 
 ## Problemas conocidos y soluciones
@@ -136,4 +137,4 @@ no es necesario hacer terraform destroy manualmente.
 
 **Pablo Guirao**  
 [github.com/pabloguirao](https://github.com/pabloguirao)   
-[cv](https://d374chtomtan27.cloudfront.net/)
+[cv](https://guiraocloud.com)
